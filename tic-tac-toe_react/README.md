@@ -37,6 +37,14 @@ npm start
 
 4. Open your browser and navigate to `http://localhost:3000` to play the game.
 
+### Troubleshooting
+
+If there are dependency issues, try running the following commands:
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
 ## Project Structure
 
 - **`src/App.js`**: Contains the main game logic and React components (`Game`, `Board`, `Square`).
