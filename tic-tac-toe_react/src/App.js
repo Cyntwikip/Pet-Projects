@@ -1,8 +1,13 @@
+'use client'
+
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
   return (
-    <button className="square" onClick={onSquareClick}>
+    <button className="square
+    w-16 h-16 bg-blue-500 text-black text-2xl font-bold flex items-center justify-center border border-blue-700 rounded-md shadow-md hover:bg-blue-600 hover:shadow-lg transition-all duration-200 ease-in-out m-1
+    hover:bg-blue-600 hover:text-white"
+    onClick={onSquareClick}>
       {value}
     </button>
   );
@@ -31,8 +36,8 @@ function Board({ xIsNext, squares, onPlay }) {
   }
 
   return (
-    <>
-      <div className="status">{status}</div>
+    <div className="flex flex-col items-center">
+      <div className="status text-lg font-medium mb-4">{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
@@ -48,7 +53,7 @@ function Board({ xIsNext, squares, onPlay }) {
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
-    </>
+    </div>
   );
 }
 
@@ -77,20 +82,30 @@ export default function Game() {
     }
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
+        <button className="text-blue-500 hover:underline"
+        onClick={() => jumpTo(move)}>{description}</button>
       </li>
     );
   });
 
   return (
-    <div className="game">
-      <div className="game-board">
+    <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100 p-4">
+    {/* Title */}
+    <h1 className="text-4xl font-bold text-blue-600 mb-8">Tic Tac Toe</h1>
+
+    <div className="game flex flex-row items-start justify-center">
+      <div className="game-board mr-8 p-4 bg-white rounded-lg shadow-lg">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
-      <div className="game-info">
-        <ol>{moves}</ol>
+      <div className="game-info pl-4 p-4 bg-white rounded-lg shadow-lg">
+        {/* History Header */}
+        <h2 className="text-xl font-semibold mb-4">History</h2>
+        {/* History List */}
+        <div className="text-gray-600 mb-2">Click on a move to go back:</div>
+        <ul className="list-decimal">{moves}</ul>
       </div>
     </div>
+  </div>
   );
 }
 
